@@ -10,12 +10,25 @@ builddir=build/$(mode)
 objdir=$(builddir)/obj
 bin=$(builddir)/failwindeez
 
+.PHONY: mkdirs
+mkdirs:
+	@mkdir -p $(builddir) $(objdir)
+
+$(objdir)/tree-sitter.o: mkdirs ./tree-sitter/src/lib.c
+	$(cc) -std=c11 -c -o $@ ./tree-sitter/src/lib.c -I./tree-sitter/include -I./tree-sitter/src
+
+tree-sitter-css-src=$(wildcard ./tree-sitter-css/*.c)
+$(objdir)/tree-sitter-css.o: mkdirs $(tree-sitter-css-src)
+	$(cc) -std=c11 -c -o $@ $(tree-sitter-css-src) \
+		-I./tree-sitter-css/include -I./tree-sitter-css/include -I./tree-sitter/src
+
 .PHONY: clean build run watch
 
 src=$(wildcard *.c)
-$(bin): $(src)
-	@mkdir -p $(builddir) $(objdir) 
-	$(cc) $(cflags) -o $(bin) $(src)
+objs=$(objdir)/tree-sitter.o $(objdir)/tree-sitter-css.o
+includes=-I./tree-sitter/include -I./tree-sitter-css/include
+$(bin): mkdirs $(src) $(objs)
+	$(cc) $(cflags) -o $(bin) $(includes) $(src) $(objs) 
 
 build: $(bin)
 

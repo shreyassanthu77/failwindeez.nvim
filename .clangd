@@ -5,4 +5,5 @@ CompileFlags:
     - -Wall
     - -Wextra
     - -Werror
-
+    - -I./tree-sitter/include
+    - -I./tree-sitter-css/include
