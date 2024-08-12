@@ -14,19 +14,20 @@ bin=$(builddir)/failwindeez
 mkdirs:
 	@mkdir -p $(builddir) $(objdir)
 
-$(objdir)/tree-sitter.o: mkdirs ./tree-sitter/src/lib.c
-	$(cc) -std=c11 -c -o $@ ./tree-sitter/src/lib.c -I./tree-sitter/include -I./tree-sitter/src
+$(objdir)/tree-sitter.o: mkdirs ./vendor/tree-sitter/src/lib.c
+	$(cc) -std=c11 -c -o $@ ./vendor/tree-sitter/src/lib.c \
+		-I./vendor/tree-sitter/include -I./vendor/tree-sitter/src
 
-tree-sitter-css-src=$(wildcard ./tree-sitter-css/*.c)
+tree-sitter-css-src=$(wildcard ./vendor/tree-sitter-css/*.c)
 $(objdir)/tree-sitter-css.o: mkdirs $(tree-sitter-css-src)
 	$(cc) -std=c11 -c -o $@ $(tree-sitter-css-src) \
-		-I./tree-sitter-css/include -I./tree-sitter-css/include -I./tree-sitter/src
+		-I./vendor/tree-sitter-css/include -I./vendor/tree-sitter-css/include -I./vendor/tree-sitter/src
 
 .PHONY: clean build run watch
 
 src=$(wildcard *.c)
 objs=$(objdir)/tree-sitter.o $(objdir)/tree-sitter-css.o
-includes=-I./tree-sitter/include -I./tree-sitter-css/include -I./inc
+includes=-I./vendor/tree-sitter/include -I./vendor/tree-sitter-css/include -I./inc
 $(bin): mkdirs $(src) $(objs)
 	$(cc) $(cflags) -o $(bin) $(includes) $(src) $(objs) 
 

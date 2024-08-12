@@ -6,5 +6,5 @@ CompileFlags:
     - -Wextra
     - -Werror
     - -I./inc
-    - -I./tree-sitter/include
-    - -I./tree-sitter-css/include
+    - -I./vendor/tree-sitter/include
+    - -I./vendor/tree-sitter-css/include
