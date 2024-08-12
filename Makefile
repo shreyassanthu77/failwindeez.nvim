@@ -6,12 +6,15 @@ ifeq ($(mode), release)
 	cflags+=-O3 -s
 endif
 
-bin=failwindeez-$(mode)
+builddir=build/$(mode)
+objdir=$(builddir)/obj
+bin=$(builddir)/failwindeez
 
 .PHONY: clean build run watch
 
 src=$(wildcard *.c)
 $(bin): $(src)
+	@mkdir -p $(builddir) $(objdir) 
 	$(cc) $(cflags) -o $(bin) $(src)
 
 build: $(bin)
@@ -23,4 +26,4 @@ watch: $(bin)
 	ls $(src) | entr -cr make -s run -e mode=$(mode)
 
 clean:
-	rm -f $(bin)
+	rm -rf build
