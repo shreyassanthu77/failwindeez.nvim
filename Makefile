@@ -26,7 +26,7 @@ $(objdir)/tree-sitter-css.o: mkdirs $(tree-sitter-css-src)
 
 src=$(wildcard *.c)
 objs=$(objdir)/tree-sitter.o $(objdir)/tree-sitter-css.o
-includes=-I./tree-sitter/include -I./tree-sitter-css/include
+includes=-I./tree-sitter/include -I./tree-sitter-css/include -I./inc
 $(bin): mkdirs $(src) $(objs)
 	$(cc) $(cflags) -o $(bin) $(includes) $(src) $(objs) 
 
