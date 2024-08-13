@@ -10,13 +10,22 @@ typedef struct {
 } string_t;
 
 #define string_const(str)                                                      \
-  { str, sizeof(str) - 1, 0 }
+  ((string_t){.data = str, .length = sizeof(str) - 1, .capacity = 0})
+
+#define string_constn(str, len)                                                \
+  ((string_t){.data = str, .length = len, .capacity = 0})
 
 #define string_owned(str)                                                      \
-  { str, sizeof(str) - 1, sizeof(str) - 1 }
+        ((string_t){.data = str, .length = strlen(str), .capacity = strlen(str) + 1}
+
+#define string_ownedn(str, len)                                                \
+                        ((string_t){.data = str, .length = len, .capacity = len + 1}
 
 #define string_view(str)                                                       \
-  { str, strlen(str), 0 }
+  ((string_t){.data = str, .length = strlen(str), .capacity = 0})
+
+#define string_viewn(str, len)                                                 \
+  ((string_t){.data = str, .length = len, .capacity = 0})
 
 #define string_dup(s) string_with_capacity(s.length)
 
