@@ -1,0 +1,18 @@
+.{
+    .name = "failwindeez",
+    .version = "0.0.1",
+    .dependencies = .{
+        .@"tree-sitter-css" = .{
+            .url = "./vendor/tree-sitter-css",
+            .hash = "1220fd35deb93f10010160f787d9230cc2f2b57e7c2aa1ee2c91770ff7f0a3293745",
+        },
+        .@"tree-sitter" = .{
+            .url = "./vendor/tree-sitter",
+            .hash = "122042816cf25a7d03fce616b97cc17cfaf75fc156aabb8f252e08d278455fe70e81",
+        },
+    },
+    .paths = []const u8{
+        "src",
+        "vendor",
+    },
+}

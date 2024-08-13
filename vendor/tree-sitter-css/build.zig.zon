@@ -1,0 +1,10 @@
+.{
+    .name = "tree-sitter-css",
+    .version = "0.21.0",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "include",
+    },
+}

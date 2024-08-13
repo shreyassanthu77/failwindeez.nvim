@@ -5,4 +5,4 @@ CompileFlags:
     - -Wno-all
     - -Wno-extra
     - -Wno-error
-    - -I../tree-sitter/src/
+    - -I./tree-sitter
