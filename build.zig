@@ -36,9 +36,15 @@ pub fn build(b: *std.Build) void {
     failwindeez.addCSourceFiles(.{
         .files = &.{
             "main.c",
+            "src/result.c",
+            "src/strings.c",
+            "src/fs.c",
+        },
+        .flags = &.{
+            "-std=c23",
         },
     });
-    failwindeez.addIncludePath(b.path("inc"));
+    failwindeez.addIncludePath(b.path("include/"));
     failwindeez.linkLibrary(tree_sitter.artifact("tree-sitter"));
     failwindeez.linkLibrary(tree_sitter_css.artifact("tree-sitter-css"));
 
